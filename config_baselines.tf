@@ -1,22 +1,6 @@
 locals {
   config_topics = [
-    one(module.config_baseline_ap-northeast-1[*].config_sns_topic),
-    one(module.config_baseline_ap-northeast-2[*].config_sns_topic),
-    one(module.config_baseline_ap-northeast-3[*].config_sns_topic),
-    one(module.config_baseline_ap-south-1[*].config_sns_topic),
-    one(module.config_baseline_ap-southeast-1[*].config_sns_topic),
-    one(module.config_baseline_ap-southeast-2[*].config_sns_topic),
-    one(module.config_baseline_ca-central-1[*].config_sns_topic),
-    one(module.config_baseline_eu-central-1[*].config_sns_topic),
-    one(module.config_baseline_eu-north-1[*].config_sns_topic),
-    one(module.config_baseline_eu-west-1[*].config_sns_topic),
-    one(module.config_baseline_eu-west-2[*].config_sns_topic),
-    one(module.config_baseline_eu-west-3[*].config_sns_topic),
-    one(module.config_baseline_sa-east-1[*].config_sns_topic),
-    one(module.config_baseline_us-east-1[*].config_sns_topic),
-    one(module.config_baseline_us-east-2[*].config_sns_topic),
-    one(module.config_baseline_us-west-1[*].config_sns_topic),
-    one(module.config_baseline_us-west-2[*].config_sns_topic),
+    one(module.config_baseline[*].config_sns_topic),
   ]
 }
 
