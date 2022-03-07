@@ -33,30 +33,6 @@ variable "member_accounts" {
   default = []
 }
 
-variable "target_regions" {
-  description = "A list of regions to set up with this module."
-  type        = list(string)
-  default = [
-    "ap-northeast-1",
-    "ap-northeast-2",
-    "ap-northeast-3",
-    "ap-south-1",
-    "ap-southeast-1",
-    "ap-southeast-2",
-    "ca-central-1",
-    "eu-central-1",
-    "eu-north-1",
-    "eu-west-1",
-    "eu-west-2",
-    "eu-west-3",
-    "sa-east-1",
-    "us-east-1",
-    "us-east-2",
-    "us-west-1",
-    "us-west-2"
-  ]
-}
-
 variable "tags" {
   description = "Specifies object tags key and value. This applies to all resources created by this module."
   type        = map(string)
@@ -615,11 +591,11 @@ variable "securityhub_enable_aws_foundational_standard" {
   default     = true
 }
 
-variable "securityhub_enable_product_arns" {
-  description = "List of Security Hub product ARNs, `<REGION>` will be replaced. See https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html for list."
-  type        = list(string)
-  default     = []
-}
+#variable "securityhub_enable_product_arns" {
+#  description = "List of Security Hub product ARNs, `<REGION>` will be replaced. See https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html for list."
+#  type        = list(string)
+#  default     = []
+#}
 
 # --------------------------------------------------------------------------------------------------
 # Variables for analyzer-baseline module.
@@ -635,4 +611,15 @@ variable "analyzer_name" {
   description = "The name for the IAM Access Analyzer resource to be created."
   type        = string
   default     = "default-analyzer"
+}
+
+
+# --------------------------------------------------------------------------------------------------
+# Variables for ebs-baseline module.
+# --------------------------------------------------------------------------------------------------
+
+variable "ebs_baseline_enabled" {
+  description = "Boolean whether ebs-baseline is enabled."
+  type        = bool
+  default     = true
 }
