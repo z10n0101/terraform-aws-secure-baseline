@@ -22,6 +22,12 @@ variable "master_account_id" {
   default     = ""
 }
 
+variable "delegated_admin_account_id" {
+  description = "The ID of the dedicated security AWS account associated to manage all security-related AWS services"
+  type        = string
+  default     = ""
+}
+
 variable "member_accounts" {
   description = "A list of IDs and emails of AWS accounts which associated as member accounts."
   type = list(object({

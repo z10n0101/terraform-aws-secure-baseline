@@ -13,6 +13,7 @@ module "guardduty_baseline" {
   count  = var.guardduty_enabled ? 1 : 0
   source = "./modules/guardduty-baseline"
 
+  delegated_admin_account_id   = var.delegated_admin_account_id
   disable_email_notification   = var.guardduty_disable_email_notification
   finding_publishing_frequency = var.guardduty_finding_publishing_frequency
   invitation_message           = var.guardduty_invitation_message

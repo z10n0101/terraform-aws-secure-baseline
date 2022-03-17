@@ -33,3 +33,9 @@ resource "aws_guardduty_invite_accepter" "master" {
   detector_id       = aws_guardduty_detector.default.id
   master_account_id = var.master_account_id
 }
+
+resource "aws_guardduty_organization_admin_account" "master" {
+  count = var.delegated_admin_account_id != "" ? 1 : 0
+
+  admin_account_id = var.delegated_admin_account_id
+}
