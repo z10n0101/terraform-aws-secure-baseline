@@ -11,7 +11,7 @@ module "analyzer_baseline" {
   source = "./modules/analyzer-baseline"
 
   analyzer_name   = var.analyzer_name
-  is_organization = local.is_master_account
+  is_organization = local.is_master_account || local.is_delegated_admin_account
 
   tags = var.tags
 }
