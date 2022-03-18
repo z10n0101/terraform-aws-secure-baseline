@@ -39,13 +39,6 @@ resource "aws_guardduty_member" "members" {
 #  master_account_id = var.master_account_id
 #}
 
-# Only master account can create delegated admin
-resource "aws_guardduty_organization_admin_account" "master" {
-  count = var.master_account_id == "" && var.delegated_admin_account_id != "" ? 1 : 0
-
-  admin_account_id = var.delegated_admin_account_id
-}
-
 resource "aws_guardduty_organization_configuration" "admin" {
   count = local.is_admin_account ? 1 : 0
 
