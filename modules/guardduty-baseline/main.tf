@@ -27,12 +27,14 @@ resource "aws_guardduty_member" "members" {
   invitation_message         = var.invitation_message
 }
 
-resource "aws_guardduty_invite_accepter" "master" {
-  count = var.master_account_id != "" ? 1 : 0
-
-  detector_id       = aws_guardduty_detector.default.id
-  master_account_id = var.master_account_id
-}
+# Disable invitation auto-accepter
+#
+#resource "aws_guardduty_invite_accepter" "master" {
+#  count = var.master_account_id != "" ? 1 : 0
+#
+#  detector_id       = aws_guardduty_detector.default.id
+#  master_account_id = var.master_account_id
+#}
 
 resource "aws_guardduty_organization_admin_account" "master" {
   count = var.delegated_admin_account_id != "" ? 1 : 0
