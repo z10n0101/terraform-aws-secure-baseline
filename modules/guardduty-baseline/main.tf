@@ -1,5 +1,6 @@
 locals {
   is_admin_account = var.master_account_id == "" && var.delegated_admin_account_id == ""
+  accounts         = local.is_admin_account ? var.member_accounts : []
 }
 resource "aws_guardduty_detector" "default" {
   enable                       = true
@@ -20,14 +21,16 @@ resource "aws_guardduty_detector" "default" {
 }
 
 resource "aws_guardduty_member" "members" {
-  count = local.is_admin_account ? length(var.member_accounts) : 0
+  for_each = {
+    for account in local.accounts : account.account_id => account
+  }
 
   detector_id                = aws_guardduty_detector.default.id
   invite                     = true
-  account_id                 = var.member_accounts[count.index].account_id
   disable_email_notification = var.disable_email_notification
-  email                      = var.member_accounts[count.index].email
   invitation_message         = var.invitation_message
+  account_id                 = each.value.account_id
+  email                      = var.disable_email_notification ? "" : each.value.email
 }
 
 # Disable invitation auto-accepter
