@@ -13,7 +13,7 @@ variable "region" {
 }
 
 variable "account_type" {
-  description = "The type of the AWS account. The possible values are `individual`, `master` and `member` . Specify `master` and `member` to set up centalized logging for multiple accounts in AWS Organization. Use individual` otherwise."
+  description = "The type of the AWS account. The possible values are `individual`, `master`, `delegated_admin`, `member` . Specify `master` and `member` to set up centalized logging for multiple accounts in AWS Organization. Use individual` otherwise."
   type        = string
   default     = "individual"
 }

@@ -1,10 +1,13 @@
+locals {
+  is_admin_account = var.master_account_id == "" && var.delegated_admin_account_id == ""
+}
 resource "aws_guardduty_detector" "default" {
   enable                       = true
   finding_publishing_frequency = var.finding_publishing_frequency
 
   # datasources can't be individually managed in each member account.
   dynamic "datasources" {
-    for_each = var.master_account_id == "" ? [var.master_account_id] : []
+    for_each = local.is_admin_account ? [1] : []
 
     content {
       s3_logs {
@@ -17,7 +20,7 @@ resource "aws_guardduty_detector" "default" {
 }
 
 resource "aws_guardduty_member" "members" {
-  count = length(var.member_accounts)
+  count = local.is_admin_account ? length(var.member_accounts) : 0
 
   detector_id                = aws_guardduty_detector.default.id
   invite                     = true
@@ -36,8 +39,23 @@ resource "aws_guardduty_member" "members" {
 #  master_account_id = var.master_account_id
 #}
 
+# Only master account can create delegated admin
 resource "aws_guardduty_organization_admin_account" "master" {
-  count = var.delegated_admin_account_id != "" ? 1 : 0
+  count = var.master_account_id == "" && var.delegated_admin_account_id != "" ? 1 : 0
 
   admin_account_id = var.delegated_admin_account_id
+}
+
+resource "aws_guardduty_organization_configuration" "admin" {
+  count = local.is_admin_account ? 1 : 0
+
+  detector_id = aws_guardduty_detector.default.id
+
+  auto_enable = false
+
+  datasources {
+    s3_logs {
+      auto_enable = true
+    }
+  }
 }

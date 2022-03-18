@@ -12,10 +12,11 @@ terraform {
 data "aws_caller_identity" "current" {}
 
 locals {
-  is_individual_account = var.account_type == "individual"
-  is_master_account     = var.account_type == "master"
-  is_cloudtrail_enabled = var.cloudtrail_baseline_enabled && (local.is_individual_account || local.is_master_account)
-  is_organization_trail = local.is_master_account && !var.turn_off_organization_trail
+  is_individual_account      = var.account_type == "individual"
+  is_master_account          = var.account_type == "master"
+  is_delegated_admin_account = var.account_type == "delegated_admin"
+  is_cloudtrail_enabled      = var.cloudtrail_baseline_enabled && (local.is_individual_account || local.is_master_account)
+  is_organization_trail      = local.is_master_account && !var.turn_off_organization_trail
 }
 
 # --------------------------------------------------------------------------------------------------
