@@ -5,8 +5,8 @@
 # --------------------------------------------------------------------------------------------------
 
 locals {
-  guardduty_master_account_id = var.master_account_id
-  guardduty_member_accounts   = local.is_master_account && var.delegated_admin_account_id != "" ? [] : var.member_accounts
+  guardduty_master_account_id = var.delegated_admin_account_id != "" ? var.delegated_admin_account_id : var.master_account_id
+  guardduty_member_accounts   = var.delegated_admin_account_id != "" ? [] : var.member_accounts
 }
 
 module "guardduty_baseline" {
