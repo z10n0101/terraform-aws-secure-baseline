@@ -1,14 +1,19 @@
 # terraform-aws-secure-baseline
 
-[![Github Actions](https://github.com/nozaq/terraform-aws-secure-baseline/actions/workflows/main.yml/badge.svg)](https://github.com/nozaq/terraform-aws-secure-baseline/actions/workflows/main.yml)
-[![Releases](https://img.shields.io/github/v/release/nozaq/terraform-aws-secure-baseline)](https://github.com/nozaq/terraform-aws-secure-baseline/releases/latest)
+[![Github Actions](https://github.com/htec-infra/terraform-aws-secure-baseline/actions/workflows/main.yml/badge.svg)](https://github.com/nozaq/terraform-aws-secure-baseline/actions/workflows/main.yml)
+[![Releases](https://img.shields.io/github/v/release/htec-infra/terraform-aws-secure-baseline)](https://github.com/nozaq/terraform-aws-secure-baseline/releases/latest)
 
-[Terraform Module Registry](https://registry.terraform.io/modules/nozaq/secure-baseline/aws)
+[Terraform Module Registry](https://registry.terraform.io/modules/htec-infra/secure-baseline/aws)
 
-A terraform module to set up your AWS account with the reasonably secure configuration baseline.
+## Overview
+A Terraform module to set up your AWS account with the reasonably secure configuration baseline.
 Most configurations are based on [CIS Amazon Web Services Foundations v1.4.0] and [AWS Foundational Security Best Practices v1.0.0].
 
 See [Benchmark Compliance](./compliance.md) to check which items in various benchmarks are covered.
+
+## Credits
+Source repository: https://github.com/nozaq/terraform-aws-secure-baseline
+
 
 ## Features
 
@@ -48,33 +53,12 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 module "secure_baseline" {
-  source = "nozaq/secure-baseline/aws"
+  source = "htec-infra/secure-baseline/aws"
 
   audit_log_bucket_name           = "YOUR_BUCKET_NAME"
   aws_account_id                  = data.aws_caller_identity.current.account_id
   region                          = data.aws_region.current.name
   support_iam_role_principal_arns = ["YOUR_IAM_USER"]
-
-  providers = {
-    aws                = aws
-    aws.ap-northeast-1 = aws.ap-northeast-1
-    aws.ap-northeast-2 = aws.ap-northeast-2
-    aws.ap-northeast-3 = aws.ap-northeast-3
-    aws.ap-south-1     = aws.ap-south-1
-    aws.ap-southeast-1 = aws.ap-southeast-1
-    aws.ap-southeast-2 = aws.ap-southeast-2
-    aws.ca-central-1   = aws.ca-central-1
-    aws.eu-central-1   = aws.eu-central-1
-    aws.eu-north-1     = aws.eu-north-1
-    aws.eu-west-1      = aws.eu-west-1
-    aws.eu-west-2      = aws.eu-west-2
-    aws.eu-west-3      = aws.eu-west-3
-    aws.sa-east-1      = aws.sa-east-1
-    aws.us-east-1      = aws.us-east-1
-    aws.us-east-2      = aws.us-east-2
-    aws.us-west-1      = aws.us-west-1
-    aws.us-west-2      = aws.us-west-2
-  }
 }
 ```
 
