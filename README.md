@@ -1,7 +1,7 @@
 # terraform-aws-secure-baseline
 
-[![Github Actions](https://github.com/htec-infra/terraform-aws-secure-baseline/actions/workflows/main.yml/badge.svg)](https://github.com/nozaq/terraform-aws-secure-baseline/actions/workflows/main.yml)
-[![Releases](https://img.shields.io/github/v/release/htec-infra/terraform-aws-secure-baseline)](https://github.com/nozaq/terraform-aws-secure-baseline/releases/latest)
+[![Github Actions](https://github.com/htec-infra/terraform-aws-secure-baseline/actions/workflows/main.yml/badge.svg)](https://github.com/htec-infra/terraform-aws-secure-baseline/actions/workflows/main.yml)
+[![Releases](https://img.shields.io/github/v/release/htec-infra/terraform-aws-secure-baseline)](https://github.com/htec-infra/terraform-aws-secure-baseline/releases/latest)
 
 [Terraform Module Registry](https://registry.terraform.io/modules/htec-infra/secure-baseline/aws)
 
@@ -16,6 +16,8 @@ Source repository: https://github.com/nozaq/terraform-aws-secure-baseline
 
 
 ## Features
+
+- Delegated Admin Account
 
 ### Identity and Access Management
 
