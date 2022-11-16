@@ -39,6 +39,12 @@ variable "member_accounts" {
   default = []
 }
 
+variable "permissions_boundary_arn" {
+  description = "The permissions boundary ARN for all IAM Roles, provisioned by this module"
+  type        = string
+  default     = ""
+}
+
 variable "tags" {
   description = "Specifies object tags key and value. This applies to all resources created by this module."
   type        = map(string)
@@ -55,6 +61,12 @@ variable "audit_log_bucket_name" {
   type        = string
 }
 
+variable "audit_log_bucket_access_logs_name" {
+  description = "The name of the S3 bucket to store various audit logs."
+  type        = string
+  default     = ""
+}
+
 variable "audit_log_bucket_custom_policy_json" {
   description = "Override policy for the audit log bucket. Allows addition of extra policies."
   type        = string
@@ -68,7 +80,7 @@ variable "audit_log_bucket_key_enabled" {
 }
 
 variable "audit_log_lifecycle_glacier_transition_days" {
-  description = "The number of days after log creation when the log file is archived into Glacier."
+  description = "The number of days after log creation when the log file is archived into Glacier. Setting to zero disables the transition."
   type        = number
   default     = 90
 }
@@ -597,11 +609,11 @@ variable "securityhub_enable_aws_foundational_standard" {
   default     = true
 }
 
-#variable "securityhub_enable_product_arns" {
-#  description = "List of Security Hub product ARNs, `<REGION>` will be replaced. See https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html for list."
-#  type        = list(string)
-#  default     = []
-#}
+variable "securityhub_enable_product_arns" {
+  description = "List of Security Hub product ARNs, `<REGION>` will be replaced. See https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-partner-providers.html for list."
+  type        = list(string)
+  default     = []
+}
 
 # --------------------------------------------------------------------------------------------------
 # Variables for analyzer-baseline module.
