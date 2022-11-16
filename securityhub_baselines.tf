@@ -17,4 +17,5 @@ module "securityhub_baseline" {
   enable_aws_foundational_standard = var.securityhub_enable_aws_foundational_standard
   master_account_id                = local.securityhub_master_account_id
   member_accounts                  = local.securityhub_member_accounts
+  enable_product_arns              = var.securityhub_enable_product_arns
 }

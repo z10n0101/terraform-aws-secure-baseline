@@ -52,8 +52,16 @@ rule "terraform_workspace_remote" {
   enabled = true
 }
 
+rule "aws_cloudwatch_log_group_invalid_name" {
+  enabled = false
+}
+
+rule "aws_iam_role_invalid_permissions_boundary" {
+  enabled = false
+}
+
 plugin "aws" {
   enabled = true
-  version = "0.12.0"
+  version = "0.19.0"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
 }
